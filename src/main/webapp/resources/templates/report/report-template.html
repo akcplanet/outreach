@@ -1,0 +1,80 @@
+<span us-spinner="{radius:50, width:13, length: 25}"></span>
+<div class="panel panel-primary" ng-controller="reportCtrl">
+	<div class="panel-heading"> Reports
+	</div>
+	<div class="panel-body">
+		<fieldset class="dashboradr-border">
+			<legend class="dashboradr-border">Download Report</legend>
+			<form>
+				<div class="col-xs-12 col-xs-offset-0" style="padding-top: 10px">
+					<div class="col-xs-4">
+						<div class="form-group">
+							<label for="nameField" class="col-xs-5">Report Date From:</label>
+							<div class="col-xs-7">
+								<div class="input-group date" data-provide="datepicker"
+									data-date-format="dd-M-yyyy">
+									<input type="text" class="form-control"
+										ng-model="report.eventDateFrom">
+									<div class="input-group-addon">
+										<span class="glyphicon glyphicon-th"></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-4">
+						<div class="form-group">
+							<label for="nameField" class="col-xs-5">Report Date To:</label>
+							<div class="col-xs-7">
+								<div class="input-group date" data-provide="datepicker"
+									data-date-format="dd-M-yyyy">
+									<input type="text" class="form-control"
+										ng-model="report.eventDateTo">
+									<div class="input-group-addon">
+										<span class="glyphicon glyphicon-th"></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+
+			</form>
+			<div class="col-xs-12 col-xs-offset-0" style="padding-top: 20px">
+				<button type="submit" class="btn btn-primary"
+					ng-click="exportData()"><font color="#ffffff" > Download</font></button>
+				<button type="reset" class="btn btn-default"
+					ng-click="resetexportData()">Reset</button>
+			</div>
+			<div class="col-xs-12 col-xs-offset-0"></div>
+		</fieldset>
+
+
+	</div>
+	
+<!-- 	upload -->
+	
+	
+	
+		<div class="panel-body">
+		<fieldset class="dashboradr-border">
+			<legend class="dashboradr-border">Upload Report </legend>
+    <div class="form-group">
+        <input type="file" name="file" file-model="uploadFile" required >
+    </div>
+			<div class="col-xs-12 col-xs-offset-0" style="padding-top: 20px">
+				<button type="submit" class="btn btn-primary" ng-click="uploadXLSReport(uploadFile)"><font color="#ffffff">Upload</font></button>
+				<button type="reset" class="btn btn-default" ng-click="uplaodReset()">Reset</button>
+			</div>
+			<div class="col-xs-12 col-xs-offset-0"></div>
+		</fieldset>
+
+
+	</div>
+	
+	
+	
+
+</div>

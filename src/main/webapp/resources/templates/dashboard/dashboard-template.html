@@ -1,0 +1,43 @@
+<span us-spinner="{radius:50, width:13, length: 25}"></span>
+<div class="panel panel-primary" >
+	<div class="panel-heading">
+		<i class="fa fa-tachometer fa-2x"></i> Weekly Data Analysis
+	</div>
+	<div class="panel-body">
+				<div class="col-xs-6 col-xs-offset-0">
+		<fieldset class="dashboradr-border">
+			<legend class="dashboradr-border">Volunteer/Council </legend>
+			 <nvd3 options="council" data="councilDashData"></nvd3>
+
+		</fieldset>
+</div>
+
+
+				<div class="col-xs-6 col-xs-offset-0">
+		<fieldset class="dashboradr-border">
+			<legend class="dashboradr-border">Volunteer/School </legend>
+			 <nvd3 options="school" data="schooolDashData"></nvd3>
+
+		</fieldset>
+</div>
+
+
+				<div class="col-xs-6 col-xs-offset-0">
+		<fieldset class="dashboradr-border">
+			<legend class="dashboradr-border">Volunteer/Event Type </legend>
+			 <nvd3 options="event_type" data="eventTypeDashData"></nvd3>
+
+		</fieldset>
+</div>
+
+
+				<div class="col-xs-6 col-xs-offset-0">
+		<fieldset class="dashboradr-border">
+			<legend class="dashboradr-border">Volunteer/Activity</legend>
+			 <nvd3 options="activity" data="activityDashData"></nvd3>
+
+		</fieldset>
+</div>
+	</div>
+
+</div>

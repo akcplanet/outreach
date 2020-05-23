@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd"
+	version="2.0">
+
+	<named-native-query name="Role.findByEvent"
+		result-class="org.outreach.cts.domain.SchoolDetails">
+		<query>
+      <![CDATA[     
+     Select e from SchoolDetails e ]]>
+      </query>
+	</named-native-query>
+
+
+	<named-native-query name="EventSearch.GetEvent"
+		result-class="org.outreach.cts.domain.EventDetails">
+		<query>
+      <![CDATA[     
+     select * from event_details ed where
+     ((:activtyName IS NULL) OR  (ed.activity_id= :activtyName )) AND
+     ((:councilName IS NULL) OR (ed. council_id= :councilName))  AND
+     ((:eventType IS NULL) OR (ed.type_of_event = :eventType)) AND
+     ((:poc1 IS NULL) OR (ed.poc_1_id = :poc1)) AND
+     ((:poc2 IS NULL)  OR (ed.poc_2_id = :poc2)) AND
+     ((:poc3 IS NULL)  OR (ed.poc_3_id = :poc3)) AND
+     ((:schoolName IS NULL) OR (ed.school_id = :schoolName)) AND
+     ((:eventDateFrom IS NULL) OR (ed.event_date <= :eventDateFrom)) AND
+     ((:eventDateTo IS NULL) OR (ed.event_date >= :eventDateTo))
+     
+     ]]>
+      </query>
+	</named-native-query>
+
+
+</entity-mappings>

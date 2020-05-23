@@ -1,0 +1,127 @@
+
+	<div class="panel panel-primary">
+		<div class="panel-heading">Event Add
+		<button type="button" class="close" data-dismiss="modal"
+			aria-hidden="true">&times;</button></div>
+		<div class="panel-body">
+				<fieldset class="dashboradr-border">
+			<legend class="dashboradr-border">Add </legend>
+			<div class="col-xs-12">
+				<form class="form-horizontal">
+					<div class="form-group">
+						<label for="nameField" class="col-xs-4">Event Type:</label>
+						<div class="col-xs-5">
+							<select class="form-control" name="eventType" id="eventType"
+								ng-model="eventDetailAdd.eventType"
+								ng-options="eventType.typeOfEvent for eventType in EventTypeName | orderBy: 'typeOfEvent' track by eventType.id">
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="nameField" class="col-xs-4">Activity Name:</label>
+						<div class="col-xs-5">
+
+							<select class="form-control" name="activity" id="activity"
+								ng-model="eventDetailAdd.activity"
+								ng-options="activity.name for activity in ActivityName | orderBy: 'name' track by activity.id">
+								<!-- <option value="" ng-if="foo">Select something to remove me.</option> -->
+							</select>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="emailField" class="col-xs-4">School Name:</label>
+						<div class="col-xs-5">
+							<select class="form-control" name="school" id="school"
+								ng-model="eventDetailAdd.schoolDetails"
+								ng-options="school.name for school in SchoolName | orderBy: 'name' track by school.id">
+							</select>
+
+
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="nameField" class="col-xs-4">Council Name:</label>
+						<div class="col-xs-5">
+							<select class="form-control" name="council" id="council"
+								ng-model="eventDetailAdd.council"
+								ng-options="council.name for council in CouncilName | orderBy: 'name' track by council.id">
+							</select>
+
+
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="phoneField" class="col-xs-4">POC1 Name:</label>
+						<div class="col-xs-5">
+
+							<select class="form-control" name="pocdetail1" id="pocdetail1"
+								ng-model="eventDetailAdd.pocDetailsByPoc1Id"
+								ng-options="pocdetail1.name for pocdetail1 in POCDetailName | orderBy: 'name' track by pocdetail1.id">
+							</select>
+
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="phoneField" class="col-xs-4">POC2 Name:</label>
+						<div class="col-xs-5">
+
+							<select class="form-control" name="pocdetail2" id="pocdetail2"
+								ng-model="eventDetailAdd.pocDetailsByPoc2Id"
+								ng-options="pocdetail2.name for pocdetail2 in POCDetailName | orderBy: 'name' track by pocdetail2.id">
+							</select>
+
+
+
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="phoneField" class="col-xs-4">POC3 Name:</label>
+						<div class="col-xs-5">
+							<select class="form-control" name="pocdetail3" id="pocdetail2"
+								ng-model="eventDetailAdd.pocDetailsByPoc3Id"
+								ng-options="pocdetail3.name for pocdetail3 in POCDetailName | orderBy: 'name' track by pocdetail3.id">
+							</select>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="descField" class="col-xs-4">Event Description:</label>
+						<div class="col-xs-8">
+							<textarea type="text" class="form-control" id="descField"
+								placeholder="Event Description"
+								ng-model="eventDetailAdd.eventDesc"></textarea>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="descField" class="col-xs-4">Event Date:</label>
+						<div class="col-xs-5">
+
+
+							<div class="input-group date" data-provide="datepicker"
+								data-date-format="dd-M-yyyy">
+								<input type="text" class="form-control"
+									ng-model="eventDetailAdd.eventDate">
+								<div class="input-group-addon">
+									<span class="glyphicon glyphicon-th"></span>
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+
+					<div class="col-xs-8 col-xs-offset-4">
+									<button type="submit" class="btn btn-primary" ng-click=eventDetailAddFn()><font color="#ffffff" data-dismiss="modal">Add</font></button>
+						<button type="reset" class="btn btn-default" ng-click=eventDetailResetFn()>Reset</button>
+					</div>
+
+				</form>
+			</div>
+			</fieldset>
+		</div>
+	</div>

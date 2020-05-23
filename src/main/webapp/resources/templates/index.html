@@ -1,0 +1,147 @@
+<html ng-app="outreachApp">
+
+<head>
+<meta content="utf-8" http-equiv="encoding">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="shortcut icon" href="">
+<link rel="stylesheet"
+	href="/resources/css/bootstrap/bootstrap-theme.min.css" />
+<link rel="stylesheet" href="/resources/css/uigrid/ui-grid.min.css" />
+<link rel="stylesheet" href="/resources/css/nggrid/ng-grid.min.css" />
+<link rel="stylesheet" href="/resources/css/other/font-awesome.min.css" />
+<link rel="stylesheet" href="/resources/css/other/nv.d3.min.css" />
+<link rel="stylesheet" href="/resources/css/other/angular-flash.min.css" />
+<link rel="stylesheet" href="/resources/css/main.css" />
+<link rel="stylesheet" href="/resources/css/base.css" />
+<link rel="stylesheet" href="/resources/css/bootstrap/bootstrap.min.css" />
+<link rel="stylesheet" href="/resources/css/bootstrap/bootstrap-datepicker3.min.css" />
+<script src="/resources/js/lib/jquery/jquery-2.1.4.min.js" /></script>
+<script src="/resources/js/lib/angular/angular.min.js" /></script>
+<script src="/resources/js/lib/angular/angular-animate.min.js" /></script>
+<script src="/resources/js/lib/angular/angular-aria.min.js" /></script>
+<script src="/resources/js/lib/angular/angular-cookies.min.js" /></script>
+<script src="/resources/js/lib/angular/angular-loader.min.js" /></script>
+<script src="/resources/js/lib/angular/angular-message-format.min.js" /></script>
+<script src="/resources/js/lib/angular/angular-messages.min.js" /></script>
+<script src="/resources/js/lib/angular/angular-mocks.js" /></script>
+<script src="/resources/js/lib/angular/angular-resource.min.js" /></script>
+<script src="/resources/js/lib/angular/angular-route.min.js" /></script>
+<script src="/resources/js/lib/angular/angular-sanitize.min.js" /></script>
+<script src="/resources/js/lib/angular/angular-touch.min.js" /></script>
+<script src="/resources/js/lib/angular2/angular-flash.min.js" /></script>
+<script src="/resources/js/lib/angularmoduls/uigrid/ui-grid.min.js" /></script>
+<script src="/resources/js/lib/bootstrap/bootstrap.min.js" /></script>
+<script src="/resources/js/lib/bootstrap/bootstrap-datepicker.js" /></script>
+<script src="/resources/js/lib/d3/d3.min.js" charset="utf-8"/></script>
+<script src="/resources/js/lib/d3/d3.v3.min.js" charset="utf-8"/></script>
+<script src="/resources/js/lib/d3/nv.d3.min.js" charset="utf-8"/></script>
+<script src="/resources/js/lib/d3/angular-nvd3.min.js" charset="utf-8"/></script>
+<script src="/resources/js/lib/ng-grid/ng-grid.min.js"  charset="utf-8"/></script>
+<script src="/resources/js/lib/ng-grid/ng-grid-csv-export.min.js" ></script>
+<script src="/resources/js/lib/other/spin.min.js" ></script>
+<script src="/resources/js/lib/other/angular-spinner.min.js" ></script>
+<script src="/resources/js/lib/other/angular-loading-spinner.js" ></script>
+<script src="/resources/js/lib/other/FileSaver.min.js" ></script>
+<script src="/resources/js/lib/other/ng-file-upload.min.js" ></script>
+<script src="/resources/js/lib/other/ng-file-upload-shim.min.js" ></script>
+<script src="/resources/js/controller/ActivityController.js" /></script>
+<script src="/resources/js/controller/AnalysisController.js" /></script>
+<script src="/resources/js/controller/CouncilController.js" /></script>
+<script src="/resources/js/controller/DashboardController.js" /></script>
+<script src="/resources/js/controller/ErrorController.js" /></script>
+<script src="/resources/js/controller/EventDetailController.js" /></script>
+<script src="/resources/js/controller/EventTypeController.js" /></script>
+<script src="/resources/js/controller/POCDetailController.js" /></script>
+<script src="/resources/js/controller/ReportController.js" /></script>
+<script src="/resources/js/controller/SchoolDetailController.js" /></script>
+<script src="/resources/js/controller/VolunteerController.js" /></script>
+<script src="/resources/js/directives/maindirective.js" /></script>
+<script src="/resources/js/filters/mainfilter.js" /></script>
+<script src="/resources/js/services/ActivityService.js" /></script>
+<script src="/resources/js/services/AnalysisService.js" /></script>
+<script src="/resources/js/services/CouncilService.js" /></script>
+<script src="/resources/js/services/DashboardService.js" /></script>
+<script src="/resources/js/services/ErrorService.js" /></script>
+<script src="/resources/js/services/EventDetailService.js" /></script>
+<script src="/resources/js/services/EventTypeService.js" /></script>
+<script src="/resources/js/services/POCDetailService.js" /></script>
+<script src="/resources/js/services/ReportService.js" /></script>
+<script src="/resources/js/services/SchoolDetailService.js" /></script>
+<script src="/resources/js/services/VolunteerService.js" /></script>
+<script src="/resources/js/constant/outreachconstant.js" /></script>
+<script src="/resources/js/utils/column_Defs.js" /></script>
+<script src="/resources/js/app.js" /></script>
+
+
+<script>
+
+
+$(document).ready(function(){
+	
+	$('.datepicker').datepicker();
+})
+
+</script>
+
+</head>
+
+<body>
+	<header>
+		<nav class="navbar navbar-inverse">
+			<div class="container" ng-controller="activeCtrl">
+				<ul class="nav navbar-nav navbar-left">
+					<li  ng-class="{active:isActive('/')}"><a href="#/"><i class="fa fa-home"></i>Dashboard</a></li>
+					<!-- <li ng-class="{active:isActive('/analysis')}"><a href="#/analysis" ><i class="fa fa-shield"></i>Analysis</a></li> -->
+					<li ng-class="{active:isActive('/report')}"><a href="#/report"><i class="fa fa-comment"></i>Report</a></li>	
+					<li ng-class="{active:isActive('/eventdetails')}"><a href="#/eventdetails" ><i class="fa fa-shield"></i>Event</a></li>
+						<li  ng-class="{active:isActive('/volunteersdetails')}"><a href="#/volunteersdetails"><i class="fa fa-shield"></i>Volunteer</a></li>
+					<li ng-class="{active:isActive('/schooldetails')}"><a href="#/schooldetails" ><i class="fa fa-comment"></i>School</a></li>
+					<li ng-class="{active:isActive('/activitydetails')}"><a href="#/activitydetails" ><i class="fa fa-shield"></i>Activity</a></li>
+					<li ng-class="{active:isActive('/councildetails')}"><a href="#/councildetails" ><i class="fa fa-shield"></i>Council</a></li>
+					<li ng-class="{active:isActive('/pocdetails')}"><a href="#/pocdetails"><i class="fa fa-shield"></i>POC</a></li>
+					<li ng-class="{active:isActive('eventtype')}"><a href="#/eventtype"><i class="fa fa-shield"></i>Type</a></li>
+					
+				</ul>
+			</div>
+		</nav>
+	</header>
+	<div ng-view style='padding-top: 10px; padding-left: 20px; padding-right: 20px; padding-bottom: 10px;'>
+	</div>
+</body>
+
+<!-- 
+<footer>
+	<div class="navbar navbar-inverse navbar-fixed-bottom">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target="#footer-body">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<ul class="footer-bar-btns visible-xs">
+					<li><a href="#" class="btn" title="History"><i
+							class="fa fa-2x fa-clock-o blue-text"></i></a></li>
+					<li><a href="#" class="btn" title="Favourites"><i
+							class="fa fa-2x fa-star yellow-text"></i></a></li>
+					<li><a href="#" class="btn" title="Subscriptions"><i
+							class="fa fa-2x fa-rss-square orange-text"></i></a></li>
+				</ul>
+			</div>
+			<div class="navbar-collapse collapse" id="footer-body">
+				<ul class="nav navbar-nav">
+					<li><a href="#">Browse Our Events</a></li>
+					<li><a href="#">About Outreach</a></li>
+					<li><a href="#">Contact Us</a></li>
+					<li><a href="#">Our Team</a></li>
+					<li><a href="#">Volunteers Review</a></li>
+					<li><a href="#">Terms &amp; Conditions</a></li>
+					<li><a href="#">Privacy Policy</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer> -->
+
+
+</html>

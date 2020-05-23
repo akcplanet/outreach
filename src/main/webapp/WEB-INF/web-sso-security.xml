@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:security="http://www.springframework.org/schema/security"
+
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context.xsd
+http://www.springframework.org/schema/security
+http://www.springframework.org/schema/security/spring-security.xsd">
+
+
+
+	<context:component-scan base-package="org.outreach.cts.security"></context:component-scan>
+
+
+	<bean id="accessDeniedHandler" class="org.outreach.cts.security.AccessDeiniedHandler" />
+
+	<security:authentication-manager alias="preauthAuthManager">
+		<security:authentication-provider
+			ref="preauthAuthProvider" />
+	</security:authentication-manager>
+
+	<bean id="preauthAuthProvider"
+		class="org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationProvider">
+		<property name="preAuthenticatedUserDetailsService" ref="preAuthenticatedUserDetailsService" />
+	</bean>
+
+	<bean id="accessDecisionManager"
+		class="org.springframework.security.access.vote.AffirmativeBased">
+		<constructor-arg>
+			<list>
+				<bean id="roleVoter"
+					class="org.springframework.security.web.access.expression.WebExpressionVoter " />
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<bean id="contextSource"
+		class="org.springframework.security.ldap.DefaultSpringSecurityContextSource">
+		<constructor-arg value="ldap://zflexldap.com:389/" />
+		<property name="userDn"
+			value="uid=guest1,ou=users,ou=guests,dc=zflexsoftware,dc=com" />
+		<property name="password" value="password" />
+	</bean>
+
+</beans>

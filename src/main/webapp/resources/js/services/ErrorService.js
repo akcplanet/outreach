@@ -1,0 +1,1 @@
+var errorservice = angular.module('errorservice', [ 'ngResource', 'ngRoute' ]);

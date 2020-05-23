@@ -1,0 +1,180 @@
+<span us-spinner="{radius:50, width:13, length: 25}"></span>
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<i class="fa fa-tachometer fa-2x"></i> Event Details
+	</div>
+	<div class="panel-body">
+		<div class="col-xs-12 col-xs-offset-0">
+			<div class="col-xs-11 col-xs-offset-0">
+				<fieldset class="dashboradr-border">
+					<legend class="dashboradr-border">Search </legend>
+					<form>
+						<div class="col-xs-12 col-xs-offset-0">
+							<div class="col-xs-4">
+								<div class="form-group">
+									<label for="nameField" class="col-xs-4">Council:</label>
+									<div class="col-xs-8">
+										<select class="form-control" name="council" id="council"
+											ng-model="eventDetailSr.council"
+											ng-options="council.name for council in CouncilName | orderBy: 'name' track by council.id">
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-4">
+								<div class="form-group">
+									<label for="nameField" class="col-xs-4">School:</label>
+									<div class="col-xs-8">
+										<select class="form-control" name="school" id="school"
+											ng-model="eventDetailSr.schoolDetails"
+											ng-options="school.name for school in SchoolName | orderBy: 'name' track by school.id">
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-4">
+								<div class="form-group">
+									<label for="nameField" class="col-xs-4">Activity:</label>
+									<div class="col-xs-8">
+										<select class="form-control" name="activity" id="activity"
+											ng-model="eventDetailSr.activity"
+											ng-options="activity.name for activity in ActivityName | orderBy: 'name' track by activity.id">
+											<!-- <option value="" ng-if="foo">Select something to remove me.</option> -->
+										</select>
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<div class="col-xs-12 col-xs-offset-0" style="padding-top: 10px">
+							<div class="col-xs-4">
+								<div class="form-group">
+									<label for="nameField" class="col-xs-4">Event Type:</label>
+									<div class="col-xs-8">
+										<select class="form-control" name="eventType" id="eventType"
+											ng-model="eventDetailSr.eventType"
+											ng-options="eventType.typeOfEvent for eventType in EventTypeName | orderBy: 'typeOfEvent' track by eventType.id">
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-4">
+								<div class="form-group">
+									<label for="nameField" class="col-xs-4">POC-1:</label>
+									<div class="col-xs-8">
+										<select class="form-control" name="pocdetail1" id="pocdetail1"
+											ng-model="eventDetailSr.pocDetailsByPoc1Id"
+											ng-options="pocdetail1.name for pocdetail1 in POCDetailName | orderBy: 'name' track by pocdetail1.id">
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-4">
+								<div class="form-group">
+									<label for="nameField" class="col-xs-4">POC-2:</label>
+									<div class="col-xs-8">
+										<select class="form-control" name="pocdetail2" id="pocdetail2"
+											ng-model="eventDetailSr.pocDetailsByPoc2Id"
+											ng-options="pocdetail2.name for pocdetail2 in POCDetailName | orderBy: 'name' track by pocdetail2.id">
+										</select>
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+						<div class="col-xs-12 col-xs-offset-0" style="padding-top: 10px">
+							<div class="col-xs-4">
+								<div class="form-group">
+									<label for="nameField" class="col-xs-4">Event From:</label>
+									<div class="col-xs-8">
+										<div class="input-group date" data-provide="datepicker"
+											data-date-format="dd-M-yyyy">
+											<input type="text" class="form-control"
+												ng-model="eventDetailSr.eventDateFrom">
+											<div class="input-group-addon">
+												<span class="glyphicon glyphicon-th"></span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-4">
+								<div class="form-group">
+									<label for="nameField" class="col-xs-4">Event To:</label>
+									<div class="col-xs-8">
+										<div class="input-group date" data-provide="datepicker"
+											data-date-format="dd-M-yyyy">
+											<input type="text" class="form-control"
+												ng-model="eventDetailSr.eventDateTo">
+											<div class="input-group-addon">
+												<span class="glyphicon glyphicon-th"></span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-4">
+								<div class="form-group">
+									<label for="nameField" class="col-xs-4">POC-3:</label>
+									<div class="col-xs-8">
+										<select class="form-control" name="pocdetail3" id="pocdetail3"
+											ng-model="eventDetailSr.pocDetailsByPoc3Id"
+											ng-options="pocdetail3.name for pocdetail3 in POCDetailName | orderBy: 'name' track by pocdetail3.id">
+										</select>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</form>
+					<div class="col-xs-12 col-xs-offset-0" style="padding-top: 20px">
+						<button type="submit" class="btn btn-primary"
+							ng-click="eventDetailSearchFn()"><font color="#ffffff">Search</font></button>
+						<button type="reset" class="btn btn-default"
+							ng-click="resetDashBoard()">Reset</button>
+					</div>
+					<div class="col-xs-12 col-xs-offset-0"></div>
+				</fieldset>
+			</div>
+			<div class="col-xs-01 col-xs-offset-0">
+
+				<div style="padding-top: 20px"></div>
+				<button type="button" class="btn btn-primary" data-toggle="modal"
+					modal-show="showDialog" data-target="#eventdetailadd"><font color="#ffffff">Add</font></button>
+			</div>
+		</div>
+		<div class="col-xs-12 col-xs-offset-0">
+			<div class="col-xs-12 col-xs-offset-0">
+				<fieldset class="dashboradr-border">
+					<legend class="dashboradr-border">Deatils </legend>
+					<div class="grid" ng-grid="eventDetailgridOptions" id="grid1"></div>
+
+				</fieldset>
+			</div>
+			<div class="col-xs-01 col-xs-offset-0">
+				<div style="padding-bottom: 40px"></div>
+		<!-- 		<button type="button" class="btn btn-primary" data-toggle="modal"
+					modal-show="showDialog"><font color="#ffffff">Update</font></button> -->
+
+				<!-- <div style="padding-bottom: 30px"></div>
+				<button type="button" class="btn btn-primary" ng-click="eventDetailDeleteFn()"><font color="#ffffff">Delete</font></button> -->
+
+			</div>
+		</div>
+		<div class="col-xs-12 col-xs-offset-0" style="padding-bottom: 10px"></div>
+	</div>
+</div>
+
+<div class="modal fade" id="eventdetailadd" tabindex="-1" role="dialog" role="dialog">
+	<div class="modal-dialog">
+	<event-detail-add-dialog></event-detail-add-dialog>
+	</div>
+</div>
+
+
+<div class="modal fade" id="eventdetailupdate" tabindex="-1" role="dialog" role="dialog">
+	<div class="modal-dialog">
+	<event-detail-add-dialog></event-detail-add-dialog>
+	</div>
+</div>

@@ -1,0 +1,59 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	version="2.0">
+
+	<persistence-unit name="OUTREACHDB" transaction-type="RESOURCE_LOCAL">
+		<mapping-file>META-INF/jpql/VolunteerQueries.xml</mapping-file>
+		<mapping-file>META-INF/jpql/EventQueries.xml</mapping-file>
+		<class>org.outreach.cts.domain.SchoolDetails</class>
+		<class>org.outreach.cts.domain.Activity</class>
+		<class>org.outreach.cts.domain.Council</class>
+		<class>org.outreach.cts.domain.EventsType</class>
+		<class>org.outreach.cts.domain.PocDetails</class>	
+        <class>org.outreach.cts.domain.Count</class> 	
+    <class>org.outreach.cts.domain.EventDetails</class>	
+		<class>org.outreach.cts.domain.VolunteerDetails</class>  
+		        <class>org.outreach.cts.dto.DashoboardDTO</class> 	
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+		<shared-cache-mode>NONE</shared-cache-mode>
+		<validation-mode>NONE</validation-mode>
+		<properties>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="false" />
+			<property name="hibernate.c3p0.min_size" value="5" />
+			<property name="hibernate.c3p0.max_size" value="20" />
+			<property name="hibernate.c3p0.idleTestPeriod" value="30" />
+			<property name="hibernate.c3p0.timeout" value="0" />
+			<property name="hibernate.c3p0.max_statements" value="0" />
+			<property name="hibernate.query.jpaql_strict_compliance"
+				value="false" />
+			<property name="hibernate.validator.apply_to_ddl" value="false" />
+			<property name="hibernate.validator.autoregister_listeners"
+				value="false" />
+			<property name="hibernate.archive.autodetection" value="class, hbm" />
+			<property name="hibernate.enable_lazy_load_no_trans" value="true" />
+			<!-- <property name="hibernate.hbm2ddl.auto" value="create"/> -->
+		</properties>
+
+	</persistence-unit>
+
+
+	<!-- <persistence-unit name="ORACLEDB" transaction-type="RESOURCE_LOCAL"> 
+		<mapping-file>META-INF/VolunteerQueries.xml</mapping-file> <mapping-file>META-INF/EventQueries.xml</mapping-file> 
+		<class>org.outreach.cts.domain.Event</class> <class>org.outreach.cts.domain.Volunteer</class> 
+		<exclude-unlisted-classes>true</exclude-unlisted-classes> <shared-cache-mode>NONE</shared-cache-mode> 
+		<validation-mode>NONE</validation-mode> <properties> <property name="hibernate.dialect" 
+		value="org.hibernate.dialect.MySQLDialect" /> <property name="hibernate.show_sql" 
+		value="true" /> <property name="hibernate.format_sql" value="false" /> <property 
+		name="hibernate.c3p0.min_size" value="5" /> <property name="hibernate.c3p0.max_size" 
+		value="20" /> <property name="hibernate.c3p0.idleTestPeriod" value="30" /> 
+		<property name="hibernate.c3p0.timeout" value="0" /> <property name="hibernate.c3p0.max_statements" 
+		value="0" /> <property name="hibernate.query.jpaql_strict_compliance" value="false" 
+		/> <property name="hibernate.validator.apply_to_ddl" value="false" /> <property 
+		name="hibernate.validator.autoregister_listeners" value="false" /> <property 
+		name="hibernate.archive.autodetection" value="class, hbm" /> <property name="hibernate.hbm2ddl.auto" 
+		value="create"/> </properties> </persistence-unit> -->
+
+</persistence>

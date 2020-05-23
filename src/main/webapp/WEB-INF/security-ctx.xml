@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:security="http://www.springframework.org/schema/security"
+
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context.xsd
+http://www.springframework.org/schema/security
+http://www.springframework.org/schema/security/spring-security.xsd">
+
+
+
+
+	<security:global-method-security
+		pre-post-annotations="enabled" />
+
+	<security:http auto-config="false" entry-point-ref="authenticationEntryPoint"
+		access-decision-manager-ref="accessDecisionManager" use-expressions="true">
+		<security:intercept-url pattern="/login"
+			access="hasRole('ROLE_ANONYMOUS')" />
+		<security:intercept-url pattern="/swagger/*"
+			access="hasRole('ROLE_ANONYMOUS')" />
+		<security:intercept-url pattern="/swagger.json"
+			access="hasRole('ROLE_ANONYMOUS')" />
+		<security:intercept-url pattern="/**" access="isAnonymous()" />
+		<security:intercept-url pattern="/accessDenied"
+			access="hasRole('ROLE_ANONYMOUS')" />
+		<security:logout delete-cookies="JSESSIONID" />
+		<security:access-denied-handler ref="accessDeniedHandler" />
+		<security:custom-filter ref="preAuthenticatedFilter"
+			position="PRE_AUTH_FILTER" />
+	</security:http>
+
+
+
+
+
+
+</beans>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:cache="http://www.springframework.org/schema/cache"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:lang="http://www.springframework.org/schema/lang"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd 
+        http://www.springframework.org/schema/cache 
+        http://www.springframework.org/schema/cache/spring-cache.xsd
+                http://www.springframework.org/schema/aop 
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+                http://www.springframework.org/schema/jee 
+        http://www.springframework.org/schema/jee/spring-jee.xsd
+                http://www.springframework.org/schema/tx 
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+                http://www.springframework.org/schema/lang 
+        http://www.springframework.org/schema/cache/spring-lang.xsd
+                http://www.springframework.org/schema/util 
+        http://www.springframework.org/schema/cache/spring-util.xsd
+        http://www.springframework.org/schema/context
+         http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:annotation-config />
+	<aop:aspectj-autoproxy />
+	<context:component-scan base-package="org.outreach.cts" />
+	<import resource="classpath:springmvc-resteasy.xml" />
+	<!-- <import resource="web-sso-security.xml" /> -->
+
+
+
+	<!-- override the bean definition for deployment -->
+	<bean id="resteasy.deployment" class="org.jboss.resteasy.spi.ResteasyDeployment"
+		init-method="start" destroy-method="stop">
+		<property name="asyncJobServiceEnabled" value="true" />
+		<property name="mediaTypeMappings">
+			<map>
+				<entry key="json" value="application/json" />
+				<entry key="xml" value="application/xml" />
+			</map>
+		</property>
+	</bean>
+
+
+
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="ignoreUnresolvablePlaceholders" value="false" />
+		<property name="ignoreResourceNotFound" value="false" />
+		<property name="order" value="1" />
+		<property name="locations">
+			<list>
+				<value>classpath:environment.${OUTREACH_ENV}.properties</value>
+			</list>
+		</property>
+	</bean>
+
+
+	<!-- Mail service -->
+
+	<!-- <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"> 
+		<property name="host" value="${outreach.host}" /> <property name="port" value="${outreach.port}" 
+		/> <property name="username" value="yourusername" /> <property name="password" 
+		value="yourpassword" /> <property name="javaMailProperties"> <props> Use 
+		SMTP-AUTH to authenticate to SMTP server <prop Key="mail.transport.protocol">smtp</prop> 
+		<prop key="mail.smtp.auth">true</prop> Use TLS to encrypt communication with 
+		SMTP server <prop key="mail.smtp.starttls.enable">true</prop> </props> </property> 
+		</bean> -->
+
+	<!-- <bean id="outreachDataSourcePwdUtils" class="org.outreach.cts.util.ClientOShadowUtils" 
+		init-method="getOshadowPwdBySid" depends-on="appinit"> <constructor-arg name="alias" 
+		value="${outreach.alias}" /> <constructor-arg name="uid" value="${outreach.username}" 
+		/> </bean> <bean id="OutReachDataSourcePwd" factory-bean="outreachDataSourcePwdUtils" 
+		factory-method="getPassword" depends-on="outreachDataSourcePwdUtils"></bean> -->
+
+
+	<bean id="outreachDataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${outreach.datbase.driver}" />
+		<property name="url" value="${outreach.url}" />
+		<property name="username" value="${outreach.username}" />
+		<property name="password" value="${outreach.password}" />
+		<property name="initialSize" value="3" />
+		<property name="maxActive" value="2" />
+		<property name="minIdle" value="2" />
+		<property name="maxIdle" value="10" />
+		<property name="maxWait" value="-1" />
+		<property name="validationQuery" value="select 1" />
+		<property name="testOnBorrow" value="true" />
+
+	</bean>
+
+
+	<bean id="outreachEntityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="persistenceUnitName" value="OUTREACHDB" />
+		<property name="dataSource" ref="outreachDataSource" />
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+				<property name="showSql" value="true" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="outreachTxManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="outreachEntityManagerFactory" />
+	</bean>
+
+
+	<tx:advice id="outreachTxAdvice" transaction-manager="outreachTxManager">
+		<tx:attributes>
+			<tx:method name="save*" read-only="false" rollback-for="RuntimeException" />
+			<tx:method name="*" />
+		</tx:attributes>
+	</tx:advice>
+
+
+	<tx:annotation-driven transaction-manager="outreachTxManager" />
+
+	<mvc:annotation-driven />
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/resources/templates/</value>
+		</property>
+		<property name="suffix">
+			<value>.html</value>
+		</property>
+	</bean>
+
+
+
+</beans>
